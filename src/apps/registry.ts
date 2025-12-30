@@ -1,4 +1,4 @@
-import type { WindowId } from "../architexture/WindowManager";
+import type { WindowId } from "../architexture/context/WindowManager";
 
 export type AppContext = {
     windowId: WindowId,

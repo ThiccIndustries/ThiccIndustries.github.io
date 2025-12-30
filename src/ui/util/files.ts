@@ -1,7 +1,8 @@
 const images = import.meta.glob("/src/assets/images/**/*.png", {
     eager: true,
-    as: "url",
+    query: '?url',
+    import: 'default'
 });
 
 export const img = (path: string) =>
-    images[`/src/assets/images/${path}`];
+    images[`/src/assets/images/${path}`] as string;

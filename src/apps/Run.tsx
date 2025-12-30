@@ -6,7 +6,7 @@ import { Textbox } from "../ui/winform/Textbox";
 import { DetailImg } from "../ui/util/DetailImg";
 import { DetailText } from "../ui/util/DetailText";
 import { useState } from "react";
-import { useEnterKey } from "../architexture/UseEnterKey";
+import { useEnterKey } from "../architexture/hooks/UseEnterKey";
 
 const Root = styled.div`
     display: flex;

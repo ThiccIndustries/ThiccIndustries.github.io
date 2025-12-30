@@ -2,7 +2,7 @@
 import styled, { useTheme } from 'styled-components';
 
 
-import { useWindowManager, type WindowState } from '../architexture/WindowManager';
+import { useWindowManager, type WindowState } from '../architexture/context/WindowManager';
 import type { AppContext } from '../apps/registry';
 import { FlexSpacer } from './util/FlexSpacer';
 import { theme } from '../theme';

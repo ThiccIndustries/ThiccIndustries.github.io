@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useWindowManager } from "../../architexture/WindowManager"
+import { useWindowManager } from "../../architexture/context/WindowManager"
 import { Clock } from "./Clock";
 import { theme } from "../../theme";
 import { DetailImg } from "../util/DetailImg";

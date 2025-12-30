@@ -5,7 +5,7 @@ import { img } from "../ui/util/files";
 import { Button } from "../ui/winform/Button";
 import { Spacer } from "../ui/winform/Spacer";
 import { DetailImg } from "../ui/util/DetailImg";
-import { useEnterKey } from "../architexture/UseEnterKey";
+import { useEnterKey } from "../architexture/hooks/UseEnterKey";
 
 const Root = styled.div`
     display: flex;

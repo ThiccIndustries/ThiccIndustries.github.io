@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ContentPane } from "./ContentPane";
 import React, { useEffect, useRef, useState } from "react";
 import { img } from "../util/files";
-import { DetailImg } from "../util/DetailImg";
+import { useMergeRefs } from "../../architexture/hooks/UseMergeRefs";
 
 //Scrollbar
 const ScrollbarRoot = styled.div`
@@ -71,6 +71,8 @@ type DivProps = React.HTMLAttributes<HTMLDivElement>;
 export const ScrollPane = React.forwardRef<HTMLDivElement, DivProps>(
   ({ children, style, ...rest }, ref) => {
     const contentRef = useRef<HTMLDivElement>(null);
+    const mergedRef = useMergeRefs(ref, contentRef);
+    
     const [sliderTop, setSliderTop] = useState(0);
     const sliderRef = useRef<HTMLDivElement>(null);
     const isDragging = useRef(false);
@@ -159,7 +161,7 @@ export const ScrollPane = React.forwardRef<HTMLDivElement, DivProps>(
 
     return (
       <Root style={style} {...rest}>
-        <Content ref={contentRef}>
+        <Content ref={mergedRef}>
           {children}
         </Content>
         <Overlay>

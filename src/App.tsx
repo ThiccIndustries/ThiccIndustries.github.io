@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { WindowHost } from './architexture/WindowHost';
-import { WindowManagerProvider } from './architexture/WindowManager';
+import { WindowManagerProvider } from './architexture/context/WindowManager';
 import "./apps";
 import { Taskbar } from './ui/taskbar/Taskbar';
 import { theme, themes } from './theme';
 import { FlexSpacer } from './ui/util/FlexSpacer';
-import { ThemeManager } from './architexture/ThemeManager';
+import { ThemeManager } from './architexture/context/ThemeManager';
 
 const MainRoot = styled.div`
     display: flex;
@@ -24,7 +24,7 @@ const MainRoot = styled.div`
 
 export const App = () => {
     return (
-        <ThemeManager theme={themes["classic"]}>
+        <ThemeManager theme={themes["default"]}>
             <WindowManagerProvider>
                 <MainRoot onContextMenu={(e) => { e.preventDefault() }}>
                     <WindowHost />

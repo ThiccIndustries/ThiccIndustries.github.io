@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useWindowManager } from "../../architexture/WindowManager";
+import { useWindowManager } from "../../architexture/context/WindowManager";
 import { type AppProperties } from "../../apps/registry";
 import { DetailImg } from "../util/DetailImg";
 import { DetailText } from "../util/DetailText";

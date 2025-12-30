@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { WindowFrame } from "../ui/WindowFrame";
-import { useWindowManager } from "./WindowManager";
+import { useWindowManager } from "./context/WindowManager";
 
 const Root = styled.div`
     position: absolute;

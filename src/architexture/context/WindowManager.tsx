@@ -1,6 +1,6 @@
 import React, { type ReactNode, createContext, useReducer, useCallback, useContext, useState } from 'react';
-import { getApp, type AppProperties } from '../apps/registry';
-import { theme } from '../theme';
+import { getApp, type AppProperties } from '../../apps/registry';
+import { theme } from '../../theme';
 
 export type WindowId = string;
 export type WindowState = {

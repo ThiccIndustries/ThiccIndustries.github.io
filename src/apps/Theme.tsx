@@ -6,10 +6,10 @@ import { DetailText } from "../ui/util/DetailText";
 import { theme, themes } from "../theme";
 import { ScrollPane } from "../ui/winform/ScrollPane";
 import { DetailImg } from "../ui/util/DetailImg";
-import { useThemeManager } from "../architexture/ThemeManager";
-import { useState } from "react";
+import { useThemeManager } from "../architexture/context/ThemeManager";
+import { useState, type ReactNode } from "react";
 import { FlexSpacer } from "../ui/util/FlexSpacer";
-import { useEnterKey } from "../architexture/UseEnterKey";
+import { useEnterKey } from "../architexture/hooks/UseEnterKey";
 
 const Root = styled.div`
     display: flex;
