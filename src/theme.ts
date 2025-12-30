@@ -52,9 +52,9 @@ export const themes: Record<string, DefaultTheme> = {
         foregroundColor: "#C0C0C0",
         activeTitleBar: ["#000180", "#000180"],
         inactiveTitleBar: ["#808080", "#808080"],
-        startmenuBar: ["#0000FF", "#000000"],
-        primaryColor: "#0A246A",
-        secondaryColor: "#0A246A",
+        startmenuBar: ["#000180", "#0000FF", "#000180", "#000180", "#000180"],
+        primaryColor: "#000180",
+        secondaryColor: "#000180",
         primaryText: "#FFFFFF",
         secondaryText: "#C0C0C0"
     },
@@ -66,8 +66,8 @@ export const themes: Record<string, DefaultTheme> = {
         activeTitleBar: ["#000180", "#000180"],
         inactiveTitleBar: ["#808080", "#808080"],
         startmenuBar: ["#808080", "#808080"],
-        primaryColor: "#0A246A",
-        secondaryColor: "#0A246A",
+        primaryColor: "#000180",
+        secondaryColor: "#000180",
         primaryText: "#FFFFFF",
         secondaryText: "#C0C0C0"
     },
