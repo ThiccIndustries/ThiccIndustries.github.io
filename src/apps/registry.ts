@@ -2,6 +2,7 @@ import type { WindowId } from "../architexture/WindowManager";
 
 export type AppContext = {
     windowId: WindowId,
+    focused: boolean;
     open: (app: string) => void;
     close: () => void;
     focus: () => void;
@@ -40,7 +41,7 @@ export const registerApp = (app: AppComponent) => {
         resiable: meta.resiable ?? false,
         showInStart: meta.showInStart ?? false,
         showTab: meta.showTab ?? false,
-        backgroundColor: meta.backgroundColor ?? "WHITE",
+        backgroundColor: meta.backgroundColor,
         icon16: meta.icon16,
         icon24: meta.icon24,
         icon32: meta.icon32,

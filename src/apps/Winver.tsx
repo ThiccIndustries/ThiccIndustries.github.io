@@ -5,6 +5,7 @@ import { img } from "../ui/util/files";
 import { Button } from "../ui/winform/Button";
 import { Spacer } from "../ui/winform/Spacer";
 import { DetailImg } from "../ui/util/DetailImg";
+import { useEnterKey } from "../architexture/UseEnterKey";
 
 const Root = styled.div`
     display: flex;
@@ -24,6 +25,8 @@ const Info = styled.div`
     box-sizing: border-box;
 `
 export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
+    useEnterKey(ctx.focused, () => ctx.close());
+    
     return (
         <Root>
             <DetailImg src={img("apps/winver/logo.png")}></DetailImg>
@@ -57,6 +60,5 @@ Winver.app = {
     icon16: img("apps/winver/icon16.png"),
     icon24: img("apps/winver/icon24.png"),
     icon32: img("apps/winver/icon32.png"),
-    backgroundColor: "#D4D0C8",
-    showIcon: false, //Manually added to start menu
+    showTab: true,
 }

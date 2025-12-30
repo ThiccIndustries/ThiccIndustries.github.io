@@ -4,7 +4,7 @@ import { theme } from "../../theme";
 
 
 const Root = styled.div`
-    font-family: ${theme.font}
+    font-family: ${theme.font};
     font-size: 12px;
 
     & span{

@@ -10,6 +10,7 @@ const Root = styled.div`
     height: ${theme.taskbar.height}px;
     width: 100%;
     background-image: url(${theme.taskbar.stretch});
+    background-color: ${({theme}) => theme.foregroundColor};
     z-index: 1;
 `
 
@@ -26,7 +27,7 @@ const TaskbarElement = styled.div<{ $width: number, $image: string, $active?: bo
     width: ${props => props.$width}px;
     background-image: url(${props => props.$image});
 
-    color: ${theme.taskbar.textColor};
+    color: "BLACK";
     font-family: ${theme.font.family};
     font-size: ${theme.taskbar.textSize}px;
     font-weight: ${props => props.$active ? "BOLD" : "NORMAL"};
@@ -81,8 +82,8 @@ export const Taskbar = () => {
                 <TabRoot>
                     {wm.windows
                         .sort((a, b) => a.age - b.age)
-                        .map(w => (
-                            <TaskbarTab
+                        .map(w => ( w.app.showTab ?
+                            <TaskbarTab 
                                 key={w.id}
                                 onMouseDown={() => { wm.focus(w.id) }}
                                 $width={theme.taskbar.tabWidth}
@@ -91,7 +92,7 @@ export const Taskbar = () => {
                             >
                                 {w.app.icon16 && <DetailImg draggable={false} style={{ width: 16, height: 16 }} src={w.app.icon16} />}
                                 <span style={{ userSelect: "none", overflow: "hidden" }}>{w.title.slice(0, 22)}</span>
-                            </TaskbarTab>
+                            </TaskbarTab> : undefined
                         ))}
                 </TabRoot>
                 <TaskbarClock $width={theme.taskbar.clockWidth} $image={theme.taskbar.clock}>

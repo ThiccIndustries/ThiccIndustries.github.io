@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../theme";
 import { useWindowManager } from "../../architexture/WindowManager";
 import { type AppProperties } from "../../apps/registry";
 import { DetailImg } from "../util/DetailImg";
@@ -18,7 +17,7 @@ const Root = styled.div`
     box-sizing: border-box;
 
     &:hover{
-        background-color: ${theme.startmenu.itemHoverColor}
+        background-color: ${({theme}) => theme.primaryColor}
     }
 
     &:hover ${DetailText}{

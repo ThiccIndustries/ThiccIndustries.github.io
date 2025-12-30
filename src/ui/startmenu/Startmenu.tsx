@@ -19,14 +19,20 @@ const Root = styled.div`
     border-image-slice: ${theme.startmenu.top} ${theme.startmenu.right} ${theme.startmenu.bottom} ${theme.startmenu.left};
     border-image-repeat: stretch;
     z-index: 2;
-    background-color: ${theme.startmenu.background};
+    background-color: ${({theme}) => theme.foregroundColor};
 `;
 
 const Items = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-`
+`;
+
+const Logo = styled.div`
+    background-image: linear-gradient(to top,
+        ${({theme}) => theme.startmenuBar.join(",")}
+    );
+`;
 
 export const Startmenu = () => {
     const winver = getApp("winver")!;
@@ -37,7 +43,9 @@ export const Startmenu = () => {
             onMouseDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
         >
-            <DetailImg src={theme.startmenu.logo}></DetailImg>
+            <Logo>
+                <DetailImg src={theme.startmenu.logo}></DetailImg>
+            </Logo>
             <Items>
                 <StartmenuItem app={winver} />
                 <Spacer />

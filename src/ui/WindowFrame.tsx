@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 
 import { useWindowManager, type WindowState } from '../architexture/WindowManager';
@@ -31,7 +31,7 @@ const GrabHandle = styled.div<{ $active: boolean }>`
     top: ${-theme.border.gradTop}px;
     height: ${theme.border.gradHeight}px;
     background-image: linear-gradient(to right,
-        ${props => props.$active ? theme.border.gradActive.join(", ") : theme.border.gradInactive.join(", ") }
+        ${({theme, $active}) => $active ? theme.activeTitleBar.join(", ") : theme.inactiveTitleBar.join(", ") }
     );
 
     display: flex;
@@ -49,10 +49,11 @@ const WindowContent = styled.div < {$color: string} >`
     background: ${props => props.$color};
     width: 100%;
     height: 100%;
+    overflow: hidden;
 `
 
 const WindowTitle = styled.span<{$active: boolean}>`
-    color: ${props => props.$active ? theme.titlebar.colorActive : theme.titlebar.colorInactive};
+    color: ${({theme, $active}) => $active ? theme.primaryText : theme.secondaryText};
     font-family: ${theme.font.family};
     font-weight: ${theme.titlebar.weight};
     font-size: ${theme.titlebar.size}px;
@@ -91,6 +92,7 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
 
     const ctx: AppContext = {
         windowId: state.id,
+        focused: state.focused,
         open: (app: string) => wm.open(app),
         close: () => wm.close(state.id),
         focus: () => wm.focus(state.id)
@@ -127,6 +129,8 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
         }
     }, [state.x, state.y]);
 
+    const theme = useTheme();
+    
     return <Container
         $width={state.width}
         $height={state.height}
@@ -146,10 +150,13 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
             {state.app.icon16 && <DetailImg style={{ width: 16, height: 16 }} src={state.app.icon16} />}
             <WindowTitle $active={state.focused}>{state.title}</WindowTitle>
             <FlexSpacer/>
-            <WindowButton onClick={(e) => { e.stopPropagation(); if(state.focused) wm.close(state.id)}} $active={ state.focused }></WindowButton>
+            <WindowButton
+            onMouseDown={ (e) => {if(!state.focused) wm.focus(state.id); e.stopPropagation()} /*stop dragging*/ }
+            onClick={(e) => { e.stopPropagation(); if(state.focused) wm.close(state.id)}}
+            $active={ state.focused } />
         </GrabHandle>
 
-        <WindowContent $color={state.app.backgroundColor!}>
+        <WindowContent $color={state.app.backgroundColor ?? theme.foregroundColor}>
             <Content ctx={ctx} { ...state.props }/>
         </WindowContent>
     </Container>;

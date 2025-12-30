@@ -4,10 +4,10 @@ import { theme } from "../../theme";
 import { img } from "../util/files";
 
 const Root = styled.div`
+    display: flex;
+    align-content: center;
     height: 21px;
     padding-left: 6px;
-    padding-top: 3px;
-    padding-bottom: 5px;
     padding-right: 6px;
 
     border-style: solid;
@@ -29,6 +29,7 @@ const Input = styled.input`
     font-family: ${theme.font.family};
     font-size: 12px;
     width: 100%;
+    line-height: 1;
 `;
 
 type TextboxProps = React.InputHTMLAttributes<HTMLInputElement>;

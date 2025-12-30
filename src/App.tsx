@@ -3,11 +3,11 @@ import { WindowHost } from './architexture/WindowHost';
 import { WindowManagerProvider } from './architexture/WindowManager';
 import "./apps";
 import { Taskbar } from './ui/taskbar/Taskbar';
-import { theme } from './theme';
+import { theme, themes } from './theme';
 import { FlexSpacer } from './ui/util/FlexSpacer';
+import { ThemeManager } from './architexture/ThemeManager';
 
 const MainRoot = styled.div`
-    background-color: ${theme.backgroundColor};
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -18,18 +18,20 @@ const MainRoot = styled.div`
     font-smooth: never;
     -webkit-font-smoothing : none;
     line-height: 1;
+
+    background-color: ${({theme}) => theme.backgroundColor}
 `;
 
 export const App = () => {
     return (
-        <MainRoot
-            onContextMenu={(e) => { e.preventDefault() }}
-        >
+        <ThemeManager theme={themes["classic"]}>
             <WindowManagerProvider>
-                <WindowHost />
-                <FlexSpacer />
-                <Taskbar />
+                <MainRoot onContextMenu={(e) => { e.preventDefault() }}>
+                    <WindowHost />
+                    <FlexSpacer />
+                    <Taskbar />
+                </MainRoot>
             </WindowManagerProvider>
-        </MainRoot>
+        </ThemeManager>
     )
 }
