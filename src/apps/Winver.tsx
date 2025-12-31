@@ -6,6 +6,7 @@ import { Button } from "../ui/winform/Button";
 import { Spacer } from "../ui/winform/Spacer";
 import { DetailImg } from "../ui/util/DetailImg";
 import { useEnterKey } from "../architexture/hooks/UseEnterKey";
+import { DetailText } from "../ui/util/DetailText";
 
 const Root = styled.div`
     display: flex;
@@ -31,7 +32,7 @@ export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
         <Root>
             <DetailImg src={img("apps/winver/logo.png")}></DetailImg>
             <Info>
-                <span style={{ lineHeight: "1.25em" }}>
+                <DetailText style={{ lineHeight: "1.25em" }}>
                     ThiccIndustries 2000<br></br>
                     Copyright (c) Thicc Industries 2025<br></br>
                     <Spacer></Spacer>
@@ -41,9 +42,9 @@ export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
                     <b>Operating Systems</b>: OS install images for virtual machines or computers.<br></br>
                     <b>Development</b>: Thicc Industries Development page.<br></br>
                     <b>Hmm?</b>: Your guess is as good as mine.<br></br>
-                </span>
+                </DetailText>
                 <Spacer></Spacer>
-                <span>Physical memory available to ThiccIndustries: 128,000 KB</span>
+                <DetailText>Physical memory available to ThiccIndustries: 128,000 KB</DetailText>
             </Info>
             <FlexSpacer></FlexSpacer>
             <Button style={{marginRight: "8px", marginBottom: "8px"}} onClick={ctx.close}>

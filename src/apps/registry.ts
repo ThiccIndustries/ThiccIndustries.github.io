@@ -8,13 +8,22 @@ export type AppContext = {
     focus: () => void;
 }
 
+export const START_SECTIONS = [
+    'downloads',
+    'programs',
+    'games',
+    'tools'
+] as const;
+
+type StartSection = typeof START_SECTIONS[number];
+
 export type AppProperties = {
     id: string;
     title: string;
     defaultSize?: { width: number; height: number };
     positioning?: {horizontal: 'left' | 'middle' | 'right', vertical: 'top' | 'center' | 'bottom'},
     resiable?: boolean;
-    showInStart?: boolean;
+    showInStart?: StartSection | 'none';
     showTab?: boolean;
     backgroundColor?: string;
     icon16?: string;
@@ -27,7 +36,8 @@ export type AppComponent<Props = any> = React.FC<Props & { ctx: AppContext }> & 
     app: Omit<AppProperties, 'component'>
 };
 
-const appRegistry = new Map<string, AppProperties>();
+//DANGER DANGER!
+export const appRegistry = new Map<string, AppProperties>();
 
 export const registerApp = (app: AppComponent) => {
     const meta = app.app;
@@ -39,7 +49,7 @@ export const registerApp = (app: AppComponent) => {
         defaultSize: meta.defaultSize ?? { width: 800, height: 600 },
         positioning: meta.positioning ?? { horizontal: 'middle', vertical: 'center' },
         resiable: meta.resiable ?? false,
-        showInStart: meta.showInStart ?? false,
+        showInStart: meta.showInStart ?? 'none',
         showTab: meta.showTab ?? false,
         backgroundColor: meta.backgroundColor,
         icon16: meta.icon16,

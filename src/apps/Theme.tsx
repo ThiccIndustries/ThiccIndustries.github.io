@@ -217,5 +217,6 @@ Theme.app = {
     title: "Display Properties",
     defaultSize: { width: 398, height: 423 },
     showTab: true,
+    showInStart: 'tools',
     icon16: img("apps/theme/icon16.png"),
 }

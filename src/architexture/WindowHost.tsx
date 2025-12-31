@@ -21,10 +21,9 @@ export function WindowHost() {
             } }
         >
             {wm.windows
-                .sort((a, b) => a.zIndex - b.zIndex)
-                .map(w => (
+                .map(w => { return(
                     <WindowFrame key={w.id} state={w} />
-                ))}
+                )})}
         </Root>
     );
 }

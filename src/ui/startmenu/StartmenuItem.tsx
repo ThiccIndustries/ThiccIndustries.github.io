@@ -4,16 +4,16 @@ import { type AppProperties } from "../../apps/registry";
 import { DetailImg } from "../util/DetailImg";
 import { DetailText } from "../util/DetailText";
 
-const Root = styled.div`
+const Root = styled.div<{$height: number}>`
     display: flex;
-    height: 32px;
+    height: ${({$height}) => $height === 16 ? 20 : 32}px;
     width: 100%;
     user-select: none;
     background-color: transparent;
     align-items: center;
-    gap: 4px;
-    padding-left: 2px;
-    padding-right: 32px;
+    gap: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
     box-sizing: border-box;
 
     &:hover{
@@ -25,7 +25,7 @@ const Root = styled.div`
     }
 `
 
-export const StartmenuItem = ({ app }: { app: AppProperties}) => {
+export const StartmenuItem = ({ height, app }: { height: 16 | 32, app: AppProperties}) => {
     const wm = useWindowManager();
 
     const launch = () => {
@@ -34,8 +34,9 @@ export const StartmenuItem = ({ app }: { app: AppProperties}) => {
     }
 
     return (
-        <Root onClick={launch}>
-            <DetailImg src={app.icon24 ?? app.icon32 ?? ""}></DetailImg>
+        <Root $height={height} onClick={launch}>
+            <DetailImg src={ height === 16 ? app.icon16 ?? undefined : 
+                app.icon24 ?? app.icon32 ?? undefined}></DetailImg>
             <DetailText style={{ whiteSpace: "nowrap" }}>{app.title}</DetailText>
         </Root>
     )

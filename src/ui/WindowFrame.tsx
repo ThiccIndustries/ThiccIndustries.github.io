@@ -8,12 +8,13 @@ import { FlexSpacer } from './util/FlexSpacer';
 import { theme } from '../theme';
 import { DetailImg } from './util/DetailImg';
 
-const Container = styled.div.attrs<{ $width: number, $height: number, $x: number, $y: number, $focused: boolean}>(props => ({
+const Container = styled.div.attrs<{ $z: number, $width: number, $height: number, $x: number, $y: number}>(props => ({
     style: {
         width: props.$width,
         height: props.$height,
         left: props.$x,
         top: props.$y,
+        zIndex: props.$z
     }
 }))<{ $focused: boolean }>`
     position: absolute;
@@ -81,6 +82,7 @@ const WindowButton = styled.div<{$active: boolean}>`
 
 export const WindowFrame = ({ state }: { state: WindowState }) => {
     const Content = state.component as React.FC<{ctx: AppContext}>;
+    const ref = useRef<HTMLDivElement>(null);
 
     //draging system
     const dragging = useRef(false);
@@ -99,10 +101,12 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
     }
 
     const onMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
+        ref.current!.style.pointerEvents = 'none';
+
         dragging.current = true;
         offsetX.current = e.clientX - state.x;
         offsetY.current = e.clientY - state.y;
-        e.preventDefault();
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -111,12 +115,14 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
             const newY = e.clientY - offsetY.current;
             wm.move(state.id, newX, newY);
             e.preventDefault();
+            e.stopPropagation();
         }
     };
 
     const onMouseUp = () => {
         dragging.current = false;
         resizing.current = false;
+        ref.current!.style.pointerEvents = 'auto';
     };
 
     useEffect(() => {
@@ -127,7 +133,7 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
             window.removeEventListener("mousemove", onMouseMove);
             window.removeEventListener("mouseup", onMouseUp);
         }
-    }, [state.x, state.y]);
+    });
 
     const theme = useTheme();
     
@@ -136,6 +142,7 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
         $height={state.height}
         $x={state.x}
         $y={state.y}
+        $z={state.zIndex}
         $focused={state.focused}
         onClick={(e) => e.stopPropagation()}
         onMouseDown={(e) => {
@@ -156,7 +163,7 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
             $active={ state.focused } />
         </GrabHandle>
 
-        <WindowContent $color={state.app.backgroundColor ?? theme.foregroundColor}>
+        <WindowContent ref={ref} $color={state.app.backgroundColor ?? theme.foregroundColor}>
             <Content ctx={ctx} { ...state.props }/>
         </WindowContent>
     </Container>;

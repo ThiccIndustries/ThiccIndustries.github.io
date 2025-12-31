@@ -108,7 +108,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
         if (!app) throw new Error("App definition missing: " + appId);
 
         const pos = getCoordinates(app.defaultSize!, app.positioning!);
-
+        const topZ = Math.max(0, ...windows.map(w => w.zIndex)) + 1;
         dispatch({
             type: 'OPEN',
             window: {
@@ -119,7 +119,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
                 width: app.defaultSize!.width,
                 height: app.defaultSize!.height,
                 title: app.title,
-                zIndex: Date.now(),
+                zIndex: topZ,
                 focused: true,
                 maximized: false,
                 minimized: false,
@@ -127,7 +127,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
                 component: app.component
             }
         });
-    }, []);
+    }, [windows]);
 
     const value = {
         windows,
