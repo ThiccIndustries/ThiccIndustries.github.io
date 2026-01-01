@@ -8,7 +8,7 @@ export const Explorer: AppComponent = ({ctx}: {ctx : AppContext}) => {
 
     useEffect(() => {
         if(ctx.command === ""){
-            wm.open("error", "Specify folder name.");
+            wm.error("Specify folder name.");
             ctx.close();
         }
     },[]);
