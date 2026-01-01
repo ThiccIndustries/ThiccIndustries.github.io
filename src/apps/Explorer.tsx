@@ -24,6 +24,5 @@ Explorer.app = {
     title: "Explorer",
     defaultSize: { width: 541, height: 334 },
     showTab: true,
-    icon32: img("apps/minecraft/icon32.png"),
-    icon16: img("apps/minecraft/icon16.png")
+    icon16: img("apps/explorer/icon16.png")
 }
