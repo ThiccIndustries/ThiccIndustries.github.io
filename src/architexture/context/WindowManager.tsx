@@ -1,6 +1,8 @@
 import React, { type ReactNode, createContext, useReducer, useCallback, useContext, useState } from 'react';
 import { getApp, type AppProperties } from '../../apps/registry';
 import { theme } from '../../theme';
+import useSound from 'use-sound';
+import { sound } from '../../ui/util/files';
 
 export type WindowId = string;
 export type WindowState = {
@@ -12,6 +14,7 @@ export type WindowState = {
     height: number;
 
     title: string;
+    command: string;
 
     zIndex: number;
     focused: boolean;
@@ -71,7 +74,8 @@ function windowReducer(state: WindowState[], action: Action): WindowState[] {
 
 const WindowManagerContext = createContext<{
     windows: WindowState[];
-    open: (appId: string) => void;
+    open: (appId: string, command?: string) => void;
+    error: (command?: string) => void;
     close: (id: WindowId) => void;
     minimize: (id: WindowId, val?: boolean) => void;
     focus: (id: WindowId) => void;
@@ -108,8 +112,9 @@ const getCoordinates = (
 export const WindowManagerProvider = ({ children } : { children: ReactNode }) => {
     const [windows, dispatch] = useReducer(windowReducer, []);
     const [showStart, setShowStart] = useState(true);
+    const [playError] = useSound(sound("error.mp3"));
 
-    const open = useCallback((appId: string) => {
+    const open = useCallback((appId: string, command?: string) => {
         const app = getApp(appId);
 
         if (!app) throw new Error("App definition missing: " + appId);
@@ -126,6 +131,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
                 width: app.defaultSize!.width,
                 height: app.defaultSize!.height,
                 title: app.title,
+                command: command ?? "",
                 zIndex: topZ,
                 focused: true,
                 maximized: false,
@@ -139,6 +145,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
     const value = {
         windows,
         open,
+        error: (command?: string) => {playError(); open("error", command ?? "")},
         close: (id: WindowId) => dispatch({ type: 'CLOSE', id }),
         minimize: (id: WindowId, val?: boolean) => dispatch({type: 'MINIMIZE', id, val}),
         focus: (id: WindowId) => dispatch({ type: 'FOCUS', id }),

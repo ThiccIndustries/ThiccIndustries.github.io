@@ -7,6 +7,7 @@ import { DetailImg } from "../ui/util/DetailImg";
 import { DetailText } from "../ui/util/DetailText";
 import { useState } from "react";
 import { useEnterKey } from "../architexture/hooks/UseEnterKey";
+import { useWindowManager } from "../architexture/context/WindowManager";
 
 const Root = styled.div`
     display: flex;
@@ -40,14 +41,18 @@ const Buttons = styled.div`
 
 export const Run: AppComponent = ({ ctx }: { ctx: AppContext }) => {
     const [input, setInput] = useState("");
+    const wm = useWindowManager();
 
     useEnterKey(ctx.focused, () => launch());
 
     const launch = () => {
+        const [app, ...rest] = input.trim().split(/\s+/);
+        const command = rest.join(" ");
+
         try {
-            ctx.open(input);
+            wm.open(app, command);
         } catch (e: unknown) {
-            console.log(e);
+            wm.error(`Cannot find the file ' ${app} '. Make sure the filename is correct.`)
         } finally {
             ctx.close();
         }

@@ -3,7 +3,7 @@ import type { WindowId } from "../architexture/context/WindowManager";
 export type AppContext = {
     windowId: WindowId,
     focused: boolean;
-    open: (app: string) => void;
+    command: string;
     close: () => void;
     focus: () => void;
 }

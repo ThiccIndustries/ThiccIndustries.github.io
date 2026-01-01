@@ -90,7 +90,7 @@ export const WindowFrame = ({ state, style }: { state: WindowState, style?: CSSP
     const ctx: AppContext = {
         windowId: state.id,
         focused: state.focused,
-        open: (app: string) => wm.open(app),
+        command: state.command,
         close: () => wm.close(state.id),
         focus: () => wm.focus(state.id)
     }

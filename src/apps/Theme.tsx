@@ -197,7 +197,7 @@ export const Theme: AppComponent = ({ ctx }: { ctx: AppContext }) => {
                             color: th === selected ? 'white' : 'black',
                             fontWeight: th === selected ? 'bold' : 'normal'
                             
-                            }}>{th.name}</DetailText>
+                            }}>{th.name === theme.name && "*"}{th.name}</DetailText>
                     </div>
                 ))}
                 </ScrollPane>
