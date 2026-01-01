@@ -163,10 +163,7 @@ export const theme = {
         size: 12,
         weight: "BOLD",
         close: {
-            active: img("button-active.png"),
-            inactive: img("button-inactive.png"),
-            pressed: img("button-pressed.png"),
-            size: [16, 14],
+            size: [16, 14]
         },
     },
 

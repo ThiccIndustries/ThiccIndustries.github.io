@@ -22,7 +22,7 @@ export function WindowHost() {
         >
             {wm.windows
                 .map(w => { return(
-                    <WindowFrame key={w.id} state={w} />
+                    <WindowFrame style={{display: w.minimized ? 'none' : 'block'}} key={w.id} state={w} />
                 )})}
         </Root>
     );

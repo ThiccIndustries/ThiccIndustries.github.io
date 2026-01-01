@@ -3,7 +3,7 @@ import { DetailImg } from "../util/DetailImg";
 import { DetailText } from "../util/DetailText";
 import { img } from "../util/files";
 import { FlexSpacer } from "../util/FlexSpacer";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, type CSSProperties } from "react";
 
 const Root = styled.div`
     display: flex;
@@ -27,10 +27,11 @@ const Root = styled.div`
 interface Props {
     name: string;
     display: string; 
-    showFolder: (val: string) => void
+    showFolder: (val: string) => void;
+    style?: CSSProperties;
 };
 
-export const StartmenuFolderItem = forwardRef<HTMLDivElement, Props>(({name, display, showFolder}, ref) => {
+export const StartmenuFolderItem = forwardRef<HTMLDivElement, Props>(({name, display, showFolder, style}, ref) => {
     const timer = useRef<number>(null);
 
     const hoverDelay = 500;
@@ -47,7 +48,7 @@ export const StartmenuFolderItem = forwardRef<HTMLDivElement, Props>(({name, dis
     }
 
     return (
-        <Root ref={ref} onMouseDown={() => showFolder(name)} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <Root style={style} ref={ref} onMouseDown={() => showFolder(name)} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <DetailImg src={img(`system/folders/${name}.png`)}></DetailImg>
             <DetailText style={{ whiteSpace: "nowrap" }}>{display}</DetailText>
             <FlexSpacer />

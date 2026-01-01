@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef, type CSSProperties } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 
@@ -7,6 +7,7 @@ import type { AppContext } from '../apps/registry';
 import { FlexSpacer } from './util/FlexSpacer';
 import { theme } from '../theme';
 import { DetailImg } from './util/DetailImg';
+import { img } from './util/files';
 
 const Container = styled.div.attrs<{ $z: number, $width: number, $height: number, $x: number, $y: number}>(props => ({
     style: {
@@ -61,26 +62,20 @@ const WindowTitle = styled.span<{$active: boolean}>`
     font-smooth: never;
     -webkit-font-smoothing : none;
     user-select: none;
+    pointer-events: none;
 `
 
-const WindowButton = styled.div<{$active: boolean}>`
+const WindowButton = styled.div<{$icon: string, $iconPressed: string}>`
     width: ${theme.titlebar.close.size[0]}px;
     height: ${theme.titlebar.close.size[1]}px;
+    background-image: url(${({$icon}) => img($icon)});
 
-    ${props => props.$active
-    ? `
-        background-image: url(${theme.titlebar.close.active});
-        &:active{
-            background-image: url(${theme.titlebar.close.pressed});
-        }
-    `
-    : `
-        background-image: url(${theme.titlebar.close.inactive});
-    ` 
+    &:active{
+        background-image: url(${({$iconPressed}) => img($iconPressed)});
     }
 `
 
-export const WindowFrame = ({ state }: { state: WindowState }) => {
+export const WindowFrame = ({ state, style }: { state: WindowState, style?: CSSProperties }) => {
     const Content = state.component as React.FC<{ctx: AppContext}>;
     const ref = useRef<HTMLDivElement>(null);
 
@@ -138,6 +133,7 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
     const theme = useTheme();
     
     return <Container
+        style={style}
         $width={state.width}
         $height={state.height}
         $x={state.x}
@@ -157,10 +153,21 @@ export const WindowFrame = ({ state }: { state: WindowState }) => {
             {state.app.icon16 && <DetailImg style={{ width: 16, height: 16 }} src={state.app.icon16} />}
             <WindowTitle $active={state.focused}>{state.title}</WindowTitle>
             <FlexSpacer/>
+            { 
+                state.app.showTab &&
+                <WindowButton
+                $icon = {"system/window/minimize-active.png"}
+                $iconPressed = {"system/window/minimize-pressed.png"}
+                onMouseDown={ (e) => {if(!state.focused) wm.focus(state.id); e.stopPropagation()} /*stop dragging*/ }
+                onClick={(e) => { e.stopPropagation(); if(state.focused) wm.minimize(state.id)}}
+                />
+            }
             <WindowButton
+            $icon = {"system/window/button-active.png"}
+            $iconPressed = {"system/window/button-pressed.png"}
             onMouseDown={ (e) => {if(!state.focused) wm.focus(state.id); e.stopPropagation()} /*stop dragging*/ }
             onClick={(e) => { e.stopPropagation(); if(state.focused) wm.close(state.id)}}
-            $active={ state.focused } />
+            />
         </GrabHandle>
 
         <WindowContent ref={ref} $color={state.app.backgroundColor ?? theme.foregroundColor}>

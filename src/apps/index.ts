@@ -1,4 +1,5 @@
 import { MattGame } from './Mattgame';
+import { Minecraft } from './Minecraft';
 import { registerApp } from './registry';
 import { Run } from './Run';
 import { Theme } from './Theme';
@@ -8,3 +9,4 @@ registerApp(Run);
 registerApp(Winver);
 registerApp(Theme);
 registerApp(MattGame);
+registerApp(Minecraft);

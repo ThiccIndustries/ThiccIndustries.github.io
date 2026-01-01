@@ -29,7 +29,7 @@ type Action =
     | { type: 'FOCUS'; id: WindowId }
     | { type: 'MOVE'; id: WindowId; x: number; y: number }
     | { type: 'RESIZE'; id: WindowId; width: number; height: number }
-    | { type: 'MINIMIZE'; id: WindowId }
+    | { type: 'MINIMIZE'; id: WindowId, val?: boolean }
     | { type: 'MAXIMIZE'; id: WindowId };
 
 function windowReducer(state: WindowState[], action: Action): WindowState[] {
@@ -39,12 +39,18 @@ function windowReducer(state: WindowState[], action: Action): WindowState[] {
 
         case 'CLOSE':
             return state.filter(w => w.id !== action.id);
+        
+        case 'MINIMIZE':
+            return state.map(w => w.id === action.id 
+                ? {...w, focused: !(action.val ?? true), minimized: action.val ?? true}
+                : w
+            );
 
         case 'FOCUS': {
             const topZ = Math.max(0, ...state.map(w => w.zIndex)) + 1;
             return state.map(w =>
                 w.id === action.id
-                    ? { ...w, focused: true, zIndex: topZ }
+                    ? { ...w, minimized: false, focused: true, zIndex: topZ }
                     : { ...w, focused: false }
             );
         }
@@ -67,6 +73,7 @@ const WindowManagerContext = createContext<{
     windows: WindowState[];
     open: (appId: string) => void;
     close: (id: WindowId) => void;
+    minimize: (id: WindowId, val?: boolean) => void;
     focus: (id: WindowId) => void;
     move: (id: WindowId, x: number, y: number) => void;
     resize: (id: WindowId, width: number, height: number) => void;
@@ -133,6 +140,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
         windows,
         open,
         close: (id: WindowId) => dispatch({ type: 'CLOSE', id }),
+        minimize: (id: WindowId, val?: boolean) => dispatch({type: 'MINIMIZE', id, val}),
         focus: (id: WindowId) => dispatch({ type: 'FOCUS', id }),
         move: (id: WindowId, x: number, y: number) => dispatch({ type: 'MOVE', id, x, y }),
         resize: (id: WindowId, width: number, height: number) => dispatch({ type: 'RESIZE', id, width, height }),

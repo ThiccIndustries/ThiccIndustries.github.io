@@ -73,7 +73,7 @@ export const Startmenu = () => {
             {folder !== "" && 
                 <StartmenuFolder
                     name={folder}
-                    style={{}}
+                    style={{marginTop: 38 + START_SECTIONS.indexOf(folder as any) * 32}}  //Jank alert ('as any', lole)
                 />
             }
         </Root>

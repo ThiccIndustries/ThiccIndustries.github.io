@@ -107,7 +107,7 @@ const PreviewWindow = ({style, theme: th, focused, title, children}: {style: Rea
             <GrabHandle $theme={th} $active={focused}>
                 <WindowTitle $active={focused}>{title}</WindowTitle>
                 <FlexSpacer />
-                <DetailImg src={focused ? theme.titlebar.close.active : theme.titlebar.close.inactive}/>
+                <DetailImg src={img("system/window/button-active.png")}/>
             </GrabHandle>
             {children}
         </PreviewWinRoot>

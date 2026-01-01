@@ -5,4 +5,5 @@ export const DetailImg = styled.img.attrs({
 })`
     pointer-events: none;
     user-select: none;
+    -webkit-user-drag: none;
 `;
