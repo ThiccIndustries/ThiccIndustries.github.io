@@ -3,18 +3,33 @@ import { WindowHost } from './architexture/WindowHost';
 import { useWindowManager, WindowManagerProvider } from './architexture/context/WindowManager';
 import "./apps";
 import { Taskbar } from './ui/taskbar/Taskbar';
-import { theme, themes } from './theme';
+import { themes } from './theme';
 import { FlexSpacer } from './ui/util/FlexSpacer';
 import { ThemeManager } from './architexture/context/ThemeManager';
 import { useEffect, useRef } from 'react';
 
 const MainRoot = styled.div`
+    @font-face {
+        font-family: 'W95font';
+        src: url('w95font.woff2') format('woff2'),
+            url('w95font.woff2') format('woff');
+        font-weight: normal;
+    }
+
+    @font-face {
+        font-family: 'W95font';
+        src: url('w95font-bold.woff2') format('woff2'),
+            url('w95font-bold.woff2') format('woff');
+        font-weight: bold;
+
+    }
+
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    font-family: ${theme.font.family};
+    font-family: "MS PGothic";
     font-size: 12px;
     font-smooth: never;
     -webkit-font-smoothing : none;

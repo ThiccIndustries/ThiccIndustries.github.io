@@ -151,7 +151,7 @@ export const theme = {
     },
 
     "font": {
-        "family": "ＭＳ Ｐゴシック"
+        "family": "MS PGothic",
     },
 
     resize: {

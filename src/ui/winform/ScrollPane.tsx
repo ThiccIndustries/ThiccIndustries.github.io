@@ -79,18 +79,37 @@ export const ScrollPane = React.forwardRef<HTMLDivElement, DivProps>(
     const startY = useRef(0);
     const startScrollTop = useRef(0);
 
-    const updateSlider = () => {
-      const content = contentRef.current;
-      if (!content) return;
+const updateSlider = () => {
+  const content = contentRef.current;
+  const slider = sliderRef.current;
+  if (!content || !slider) return;
 
-      const scrollTop = content.scrollTop;
-      const scrollHeight = content.scrollHeight;
-      const clientHeight = content.clientHeight;
+  const scrollTop = content.scrollTop;
+  const scrollHeight = content.scrollHeight;
+  const clientHeight = content.clientHeight;
 
-      const availableSpace = clientHeight - 32 - 16 * 2;
-      const top = (scrollTop / (scrollHeight - clientHeight)) * availableSpace + 16;
-      setSliderTop(top);
-    };
+  const buttonsHeight = 16 * 2; // up + down buttons
+  const root = slider.parentElement!;
+  const trackHeight = root.offsetHeight - buttonsHeight;
+
+  let sliderHeight: number;
+  let top: number;
+
+  if (scrollHeight <= clientHeight) {
+    // all content fits, slider fills track
+    sliderHeight = trackHeight;
+    top = 16;
+  } else {
+    // compute slider height proportional to visible content
+    sliderHeight = Math.max((clientHeight / scrollHeight) * trackHeight, 16);
+
+    // map scrollTop to slider top
+    top = (scrollTop / (scrollHeight - clientHeight)) * (trackHeight - sliderHeight) + 16;
+  }
+
+  slider.style.height = `${sliderHeight}px`;
+  setSliderTop(top);
+};
 
     useEffect(() => {
       const content = contentRef.current;

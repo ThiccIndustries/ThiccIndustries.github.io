@@ -25,18 +25,19 @@ const Root = styled.div<{$height: number}>`
     }
 `
 
-export const StartmenuItem = ({ height, app }: { height: 16 | 32, app: AppProperties}) => {
+export const StartmenuItem = ({ height, app, icon, command }: { height: 16 | 32, app: AppProperties, icon?: string, command?: string}) => {
     const wm = useWindowManager();
 
     const launch = () => {
-        wm.open(app.id);
+        wm.open(app.id, command);
         wm.setShowStart(false);
     }
 
+    const iconRes = icon ?? height === 16 ? app.icon16 ?? undefined : app.icon24 ?? app.icon32 ?? undefined;
+
     return (
         <Root $height={height} onClick={launch}>
-            <DetailImg src={ height === 16 ? app.icon16 ?? undefined : 
-                app.icon24 ?? app.icon32 ?? undefined}></DetailImg>
+            <DetailImg src={ iconRes }></DetailImg>
             <DetailText style={{ whiteSpace: "nowrap" }}>{app.title}</DetailText>
         </Root>
     )

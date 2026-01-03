@@ -29,6 +29,7 @@ export type AppProperties = {
     icon16?: string;
     icon24?: string;
     icon32?: string;
+    command?: string;
     component: React.ComponentType;
 }
 
@@ -39,8 +40,12 @@ export type AppComponent<Props = any> = React.FC<Props & { ctx: AppContext }> & 
 //DANGER DANGER!
 export const appRegistry = new Map<string, AppProperties>();
 
-export const registerApp = (app: AppComponent) => {
-    const meta = app.app;
+export const registerApp = (app: AppComponent, props?: Omit<AppProperties, "component">) => {
+    const meta = {
+        ...app.app,
+        ...props
+    };
+
     if (!meta) throw new Error("App missing static app metadata");
 
     appRegistry.set(meta.id, {
@@ -55,6 +60,7 @@ export const registerApp = (app: AppComponent) => {
         icon16: meta.icon16,
         icon24: meta.icon24,
         icon32: meta.icon32,
+        command: meta.command ?? "",
         component: app
     });
 }

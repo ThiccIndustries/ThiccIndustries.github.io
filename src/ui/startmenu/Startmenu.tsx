@@ -22,7 +22,7 @@ const StartmenuRoot = styled.div`
     border-width: ${theme.startmenu.top}px ${theme.startmenu.right}px ${theme.startmenu.bottom}px ${theme.startmenu.left}px;
     border-image-slice: ${theme.startmenu.top} ${theme.startmenu.right} ${theme.startmenu.bottom} ${theme.startmenu.left};
     border-image-repeat: stretch;
-    z-index: 2;
+    z-index: ${2^31}; //wow
     background-color: ${({theme}) => theme.foregroundColor};
 `;
 

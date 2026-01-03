@@ -11,7 +11,7 @@ const Root = styled.div`
     width: 100%;
     background-image: url(${theme.taskbar.stretch});
     background-color: ${({theme}) => theme.foregroundColor};
-    z-index: 1;
+    z-index: ${2^31}; //wow;
 `
 
 const TabRoot = styled.div`

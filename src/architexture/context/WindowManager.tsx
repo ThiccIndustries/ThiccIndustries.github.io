@@ -121,6 +121,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
 
         const pos = getCoordinates(app.defaultSize!, app.positioning!);
         const topZ = Math.max(0, ...windows.map(w => w.zIndex)) + 1;
+        const command1 = (command && command !== "") ? command : app.command ?? ""; 
         dispatch({
             type: 'OPEN',
             window: {
@@ -131,7 +132,7 @@ export const WindowManagerProvider = ({ children } : { children: ReactNode }) =>
                 width: app.defaultSize!.width,
                 height: app.defaultSize!.height,
                 title: app.title,
-                command: command ?? "",
+                command: command1,
                 zIndex: topZ,
                 focused: true,
                 maximized: false,
