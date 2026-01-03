@@ -25,6 +25,14 @@ const SongInfo = styled(SectionFrame)`
     display: flex;
     flex: 1;
 `
+
+const TruncateText = styled(DetailText)<{$width: number}>`
+    white-space: nowrap;        
+    overflow: hidden;          
+    text-overflow: ellipsis;
+    max-width: ${({$width}) => $width}px;
+`
+
 const Artwork = styled(ContentPane)`
     width: 96px;
     height: 96px;
@@ -110,8 +118,8 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
                     margin: '8px',
                     gap: 4
                 }}>
-                    <DetailText style={{fontWeight: 'bold'}}>{title}</DetailText>
-                    <DetailText>By: {artist}</DetailText>
+                    <TruncateText $width={275} style={{fontWeight: 'bold'}}>{title}</TruncateText>
+                    <TruncateText $width={275}>By: {artist}</TruncateText>
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -150,4 +158,5 @@ Plaza.app = {
     showTab: true,
     showInStart: 'programs',
     icon16: img("apps/plaza/icon16.png"),
+    positioning: {vertical: 'top', horizontal: 'left'}
 }
