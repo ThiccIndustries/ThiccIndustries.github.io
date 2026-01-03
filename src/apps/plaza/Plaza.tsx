@@ -81,7 +81,7 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
 
     useEffect(() => {
         const id = setInterval(() => {
-            fetch('https://api.plaza.one/status')
+            fetch('https://plaza.thiccindustries.com/')
                 .then((response) => response.json())
                 .then((data) => {
                     setTitle(data.song.title);
