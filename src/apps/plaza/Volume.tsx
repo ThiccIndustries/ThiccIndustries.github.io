@@ -1,4 +1,4 @@
-import { useRef, useState, type CSSProperties } from "react"
+import { useRef, type CSSProperties } from "react"
 import styled from "styled-components"
 import { DetailImg } from "../../ui/util/DetailImg"
 import { img } from "../../ui/util/files"
@@ -41,7 +41,6 @@ const Slider = styled.div<{$left: string}>`
 
 export const Volume = ({volume, setVolume, style}: {volume: number, setVolume: (val: number) => void, style?: CSSProperties}) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [left, setLeft] = useState(0);
 
     const dragging = useRef(false);
 

@@ -57,8 +57,10 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
     const playPause = () => {
         setPlaying(!playing);
 
-        if(!playing)
+        if(!playing){
+            audio.current?.load();
             audio.current?.play();
+        }
         else
             audio.current?.pause();
     }
