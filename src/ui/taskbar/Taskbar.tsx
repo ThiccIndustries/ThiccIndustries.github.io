@@ -44,8 +44,8 @@ const TaskbarTab = styled(TaskbarElement)`
     padding-top: 8px;
     padding-bottom: 6px;
     box-sizing: border-box;
-    align-items: center;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
     white-space: nowrap;
 `
 
