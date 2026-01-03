@@ -95,7 +95,7 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
                     wm.error("Plaza One API error: " + err.message);
                     ctx.close();
                 })
-        }, 1000);
+        }, 2500);
 
         return () => {
             clearInterval(id);
