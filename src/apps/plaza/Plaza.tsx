@@ -79,28 +79,31 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
         return `${m}:${s}`;
     }
 
-    useEffect(() => {
-        const id = setInterval(() => {
-            fetch('https://plaza.thiccindustries.com/')
-                .then((response) => response.json())
-                .then((data) => {
-                    setTitle(data.song.title);
-                    setArtist(data.song.artist);
-                    setCover(data.song.artwork_src);
+useEffect(() => {
+  const fetchStatus = () => {
+    fetch('https://plaza.thiccindustries.com/')
+      .then((response) => response.json())
+      .then((data) => {
+        setTitle(data.song.title);
+        setArtist(data.song.artist);
+        setCover(data.song.artwork_src);
 
-                    setDuration(data.song.length);
-                    setElapsed(data.song.position);
+        setDuration(data.song.length);
+        setElapsed(data.song.position);
+      })
+      .catch((err) => {
+        wm.error("Plaza One API error: " + err.message);
+        ctx.close();
+      });
+  };
 
-                }).catch((err) => {
-                    wm.error("Plaza One API error: " + err.message);
-                    ctx.close();
-                })
-        }, 2500);
+  fetchStatus();
 
-        return () => {
-            clearInterval(id);
-        }
-    }, []);
+  // then poll
+  const id = setInterval(fetchStatus, 2500);
+
+  return () => clearInterval(id);
+}, []);
     
     //why can't I set this through the dom???
     useEffect(() => {audio.current!.volume = volume}, [volume]);
