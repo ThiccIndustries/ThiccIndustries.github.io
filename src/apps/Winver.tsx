@@ -36,15 +36,16 @@ export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
                     ThiccIndustries 2000<br></br>
                     Copyright (c) Thicc Industries 2025<br></br>
                     <Spacer></Spacer>
-                    Use the Start Menu to select a downloads page.<br></br>
+                    Use the Start Menu to select a program.<br></br>
                     <br></br>
-                    <b>Games</b>: Imma assume you know what games are.<br></br>
-                    <b>Operating Systems</b>: OS install images for virtual machines or computers.<br></br>
-                    <b>Development</b>: Thicc Industries Development page.<br></br>
-                    <b>Hmm?</b>: Your guess is as good as mine.<br></br>
+                    <b>Downloads directory:</b><br></br>
+                    <b>Games</b>: Old and/or curious games<br></br>
+                    <b>Windows Installers</b>: OS install images for x86 PC.<br></br>
+                    <b>Mac OS Installers</b>: OS install images for m68k / PowerPC Macintosh.<br></br>
+                    <br></br> 
                 </DetailText>
                 <Spacer></Spacer>
-                <DetailText>Physical memory available to ThiccIndustries: 128,000 KB</DetailText>
+                <a draggable={false} target='_blank' href="https://github.com/MajesticWaffle">Thicc Industries Development page.</a>
             </Info>
             <FlexSpacer></FlexSpacer>
             <Button style={{marginRight: "8px", marginBottom: "8px"}} onClick={ctx.close}>
