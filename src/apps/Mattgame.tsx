@@ -13,7 +13,7 @@ export const MattGame: AppComponent = ({ctx} : {ctx: AppContext}) => {
 MattGame.app = {
     id: "mattgame",
     title: "Hexaflexagon",
-    defaultSize: { width: 640, height: 480 },
+    defaultSize: { width: 800, height: 600 },
     showTab: true,
     showInStart: 'games',
     icon16: img("apps/mattgame/icon16.png")

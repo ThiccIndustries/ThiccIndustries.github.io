@@ -70,6 +70,48 @@
         }
     ],
     "software": [],
-    "windows": [],
-    "mac": []
+    "windows": [
+        {
+            "title" : "EN_WIN2000_PRO_SP4.iso",
+            "file" : "1rVF1s5RVSD5cpg9jStG7Yy36TIg6qUOU"
+        },
+        {
+            "title" : "Windows 98 Second Edition.iso",
+            "file" : "1Y3b73sbpdO4LBmxWG4kCq3pKlV4qdHB0"
+        },
+        {
+            "title" : "TempleOS.iso",
+            "file" : "16IuHX5xYdhaj6w61bX1SjPkXmYcnKQMk"
+        },
+        {
+            "title" : "Windows Me.iso",
+            "file" : "1k2b9qDa95s-Gpy9_RmCVSaL2hvIkUZPz"
+        },
+        {
+            "title" : "Windows Professional 32-Bit.iso",
+            "file" : "1KmVHjzVmX98BhrXa05UBzGJ6WB-csHbL"
+        },
+        {
+            "title" : "Windows Professional 64-Bit Corporate Edition.iso",
+            "file" : "1dLsf4z3yvWRTZT_zpzNU5TbV6_tcy7pv"
+        },
+        {
+            "title" : "Windows95b.iso",
+            "file" : "1GbL8h0HB2R9rTRBQttqCd5vovoOQkKoQ"
+        }
+    ],
+    "mac": [
+        {
+            "title" : "Mac OS 8.5.1.iso",
+            "file" : "1ybS-N_db4G2WX526g4_Kyd2rCAOKEN4A"
+        },
+        {
+            "title" : "Mac_OS_9.2.2_Universal_Install.iso",
+            "file" : "1F_8IR9wbDmSyDI2K7JFVNVYCrkhFR30b"
+        },
+        {
+            "title" : "Mac_OS_X_Leopard_10.5.6.iso",
+            "file" : "1hEJYyvcg2mg_TPJTIQItSkChs0b_V7MA"
+        }
+    ]
 }

@@ -106,7 +106,7 @@ export const Explorer: AppComponent = ({ctx}: {ctx : AppContext}) => {
                         marginBottom: "4px",
                         fontSize: 14,
                         fontWeight: 'bolder'
-                        }}>{ctx.command}</DetailText>
+                        }}>{wm.windows.find(w => w.id === ctx.windowId)?.title}</DetailText>
                     <SidebarSep/>
                     <SidebarText>Files available for download: {array.length}</SidebarText>
                     <SidebarText>Select an item to download to your computer.</SidebarText>
