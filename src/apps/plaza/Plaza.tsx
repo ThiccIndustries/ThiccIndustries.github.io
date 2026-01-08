@@ -81,7 +81,7 @@ export const Plaza: AppComponent = ({ctx} : {ctx: AppContext}) => {
 
 useEffect(() => {
   const fetchStatus = () => {
-    fetch('https://plaza.thiccindustries.com/')
+    fetch('https://api.plaza.one/status')
       .then((response) => response.json())
       .then((data) => {
         setTitle(data.song.title);
@@ -100,7 +100,7 @@ useEffect(() => {
   fetchStatus();
 
   // then poll
-  const id = setInterval(fetchStatus, 2500);
+  const id = setInterval(fetchStatus, 1000);
 
   return () => clearInterval(id);
 }, []);
@@ -147,7 +147,7 @@ useEffect(() => {
                 alignItems: 'center',
                 paddingLeft: '8px'
                 }}>
-                <a draggable={false} href="https://plaza.one" target="_blank">Support Plaza One</a>
+                <a draggable={false} href="https://plaza.one" target="_blank">Support Nightwave Plaza</a>
             </SectionFrame>
         <audio ref={audio} hidden src="https://radio.plaza.one/mp3"></audio>    
         </Root>
@@ -156,7 +156,7 @@ useEffect(() => {
 
 Plaza.app = {
     id: "plaza",
-    title: "Plaza One Radio",
+    title: "Nightwave Plaza Radio",
     defaultSize: { width: 400, height: 131 },
     showTab: true,
     showInStart: 'programs',
