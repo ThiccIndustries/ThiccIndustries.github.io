@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import type { AppComponent, AppContext } from "./registry";
-import { FlexSpacer } from "../ui/util/FlexSpacer";
 import { img } from "../ui/util/files";
 import { Button } from "../ui/winform/Button";
 import { Spacer } from "../ui/winform/Spacer";
