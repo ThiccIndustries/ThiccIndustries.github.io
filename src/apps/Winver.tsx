@@ -25,6 +25,16 @@ const Info = styled.div`
     width: 100%;
     box-sizing: border-box;
 `
+
+const Buttons = styled.div`
+    display: flex;
+    flex: 1;
+    gap: 4px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 15px;
+`
+
 export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
     useEnterKey(ctx.focused, () => ctx.close());
     
@@ -47,10 +57,11 @@ export const Winver: AppComponent = ({ ctx }: { ctx: AppContext }) => {
                 <Spacer></Spacer>
                 <a draggable={false} target='_blank' href="https://github.com/MajesticWaffle">Thicc Industries Development page.</a>
             </Info>
-            <FlexSpacer></FlexSpacer>
-            <Button style={{marginRight: "8px", marginBottom: "8px"}} onClick={ctx.close}>
-                Ok
-            </Button>
+            <Buttons>
+                <Button style={{marginRight: "8px", marginBottom: "8px"}} onClick={ctx.close}>
+                    Ok
+                </Button>
+            </Buttons>
         </Root>
     );
 }
